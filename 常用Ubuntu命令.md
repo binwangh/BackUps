@@ -3,6 +3,13 @@
 #### 引入临时库(仅当时有效)
 	export LD_LIBRARY_PATH=/....../lib:$LD_LIBRARY_PATH
 
+#### 查看环境变量/执行环境变量
+		sudo gedit ~/.bashrc
+		source ~/.bashrc
+		# 环境变量格式
+		export PATH="/.../bin:$PATH"
+		export PATH="/.../lib:$PATH"
+
 #### Caffe写入日志并同时在屏幕中显示命令
 	2 > &1 | tee rob.log
 
@@ -14,6 +21,9 @@
 
 #### 删除文件夹
 	rm -rf ******
+
+#### 创建文件夹
+	mkdir AAAAAA
 
 #### 解压tar.bz2（可以指定文件夹）
 	tar zxvf ******
@@ -28,6 +38,14 @@
 
 #### 拷贝文件
 	cp -r AAAAAA/. BBBBBB
+
+#### sh文件安装(比如：安装Anaconda)
+	bash ******.sh
+
+#### 软链接（将后者链接到前者上）/执行操作
+	sudo ln -s libhdf5_hl.so.7 libhdf5_hl.so.10
+	sudo ln -s libhdf5.so.7 libhdf5.so.10
+	sudo ldconfig
 
 #### Vim
 	:wq	保存并关闭
