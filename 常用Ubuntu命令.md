@@ -31,13 +31,19 @@
 	mkdir AAAAAA
 	tar zxvf ****** -C AAAAAA
 
+#### 解压zip
+	unzip ******
+
+	mkdir AAAAAA
+	unzip ****** -d AAAAAA
+
 #### 查看进程 杀进程
 	ps -ef
 
 	kill -s 9 "PID"   PID可以通过查询进程获得对应的数字
 
 #### 拷贝文件
-	cp -r AAAAAA/. BBBBBB
+	cp -r AAAAAA/. BBBBBB 
 
 #### sh文件安装(比如：安装Anaconda)
 	bash ******.sh
@@ -53,3 +59,10 @@
 	l	向右
 	o	开启新一行
 	i	插入
+
+#### 查看文件的MD5
+	md5sum AAAAAA
+
+#### 查看文件依赖的库
+	readelf -d AAAAAA
+	ldd AAAAAA | grep BBBBBB   由于AAAAAA依赖了BBBBBB，所以可以查看BBBBBB的具体信息 
