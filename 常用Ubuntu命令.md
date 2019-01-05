@@ -65,4 +65,8 @@
 
 #### 查看文件依赖的库
 	readelf -d AAAAAA
-	ldd AAAAAA | grep BBBBBB   由于AAAAAA依赖了BBBBBB，所以可以查看BBBBBB的具体信息 
+    ldd -r AAAAAA
+	ldd AAAAAA | grep BBBBBB   由于AAAAAA依赖了BBBBBB，所以可以查看BBBBBB的具体信息
+
+#### 搜索文件内容（关键字AAAAAA，在文件夹路径下输入命令即可）
+	grep -rn AAAAAA * 

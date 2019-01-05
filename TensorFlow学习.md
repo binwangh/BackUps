@@ -85,10 +85,13 @@ TensorFlow会话提供求解张量和执行操作的运行环境。通过Session
 	
 		Y = 推理值；Y_= 真实值
 	（1）平方损失函数
-		loss = tf.reduce_sum(tf.pow(Y-Y_, 2))/(total_samples)
+		loss_op = tf.reduce_sum(tf.pow(Y-Y_, 2))/(total_samples)
 	（2）交叉熵损失函数
-		loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_logits(labels=Y_, logits=Y))
+		loss_op = tf.reduce_mean(tf.nn.softmax_cross_entropy_logits(labels=Y_, logits=Y))
 	（3）指数损失函数
+
+    loss_op = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(
+        logits=logits, labels=tf.cast(labels, dtype=tf.int32)))
 
 	损失函数是一个非负实值函数，值越小说明模型对训练集拟合得越好。使用损失函数对所有训练样本求损失值，再累加求平均可得到模型的经验风险。
 	为了降低过度训练可能造成的过拟合风险，可以引入专门用来度量模型复杂度的正则化项或惩罚项（LO、L1、L2范数）
@@ -134,6 +137,15 @@ minimize方法训练模型：模型训练的过程需要最小化损失函数。
 
 # TensorFlow数据处理方法
 TensorFlow主要涉及三类数据：输入数据集、模型参数、命令行参数。
+
+| 数据类别 | 数据来源 | 数据载体 | 数据消费者 |
+|  :------: |  :------:  |  :------:  |  :------:  |
+| 输入数据集 | 文件系统 | 张量 | 操作 |
+| 模型参数 | checkpoint文件 | 变量 | Saver |
+| 模型超参数 | 命令行 | FLAGS名字空间 | 优化器
+
+	操作：矩阵相乘、激活函数、神经网络层等
+	优化器：负责计算梯度和更新模型参数，有SGD、Adam、Adagrad、Adadelta等。
 
 ## 输入数据集
 处理输入数据的典型流程：首先将输入数据集从**文件系统**读取到**内存**中，然后将其转换为**模型需要的输入数据格式**，接着以某种方式传入数据流图，继而开始真正的模型训练过程。
